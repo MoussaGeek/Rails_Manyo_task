@@ -2,7 +2,7 @@
   <div class="notice"><%= flash[:notice] %></div>
 <% end %>
 
-<h1>New Task Page</h1>
+<h1><%= t("common.new_task") %></h1>
 
 <%= form_with(model: @task, local: true) do |form| %>
   <% if @task.errors.any? %>
@@ -28,7 +28,7 @@
   </div>
   
     <div class="actions">
-      <%= form.submit "Create Task", id: "create-task" %>
+      <%= form.submit t("common.create_task"), id: "create-task" %>
     </div>
   <% end %>
-<%= link_to 'Back', tasks_path, id: "back" %>
+<%= link_to t("common.back"), tasks_path, id: "back" %>
