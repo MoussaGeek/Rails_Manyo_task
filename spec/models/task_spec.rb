@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Task, type: :model do
+RSpec.describe 'Fonction de modèle de tâche', type: :model do
   describe 'Test de Validation' do
     context 'Si le Title de la tâche est une chaîne vide' do
       it 'Validation échoue' do
