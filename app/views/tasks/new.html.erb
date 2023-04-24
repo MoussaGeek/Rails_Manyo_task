@@ -26,6 +26,21 @@
     <%= form.label :content %><br>
     <%= form.text_area :content %>
   </div>
+
+  <div class="field">
+    <%= form.label :終了期限 %><br>
+    <%= form.date_field :deadline_on %>
+  </div>
+
+  <div class="field">
+    <%= form.label :優先度 %><br>
+    <%= form.select :priority, options_for_select(Task.priorities.map { |label, _value| [t("enums.task.priority_enum.#{label}"), label.to_s] }, @task&.priority&.to_s), include_blank: true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :ステータス %><br>
+    <%= form.select :status, options_for_select(Task.statuses.map { |label, _value| [t("enums.task.status_enum.#{label}"), label.to_s] }, selected: params[:status]), include_blank: true %>
+  </div>
   
     <div class="actions">
       <%= form.submit t("common.create_task"), id: "create-task" %>
