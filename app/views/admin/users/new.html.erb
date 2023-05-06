@@ -1,21 +1,21 @@
-<h1><%= t('action.new') %></h1>
+<h1><%= t('.title') %></h1>
 
-<%= form_with(model: @user, url: admin_users_path, local: true ) do |form| %>
+<%= form_with(model: @user, url: admin_users_path(@user), local: true) do |form| %>
   <% if @user.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
+      <h2><%= @user.errors.count %> 件のエラーメッセージ </h2>
 
       <ul>
-      <% @user.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
+        <% @user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
       </ul>
     </div>
   <% end %>
 
   <div class="field">
-    <%= form.label :user_name %>
-    <%= form.text_field :user_name %>
+    <%= form.label :name %>
+    <%= form.text_field :name %>
   </div>
 
   <div class="field">
@@ -34,15 +34,11 @@
   </div>
 
   <div class="field">
-    <%= form.label :admin %>
+    <%= form.label :admin, User.human_attribute_name(:admin) %><br>
     <%= form.check_box :admin %>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit t('helpers.submit.create', model: User.model_name.human), id: "create-user" %>
   </div>
 <% end %>
-
-<div class="bottom_link">
-  <%= link_to t('action.back'), tasks_path %>
-</div>

@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 2023_04_29_144105) do
     t.date "deadline_on", null: false
     t.integer "priority", null: false
     t.integer "status", null: false
-    t.bigint "user_id"
+    t.bigint "user_id", null: false
     t.index ["user_id"], name: "index_tasks_on_user_id"
   end
 
@@ -33,7 +33,8 @@ ActiveRecord::Schema.define(version: 2023_04_29_144105) do
     t.string "password_digest", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.boolean "admin", null: false
+    t.boolean "admin", default: false, null: false
+    t.integer "tasks_count", default: 0, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 

@@ -1,22 +1,35 @@
 class SessionsController < ApplicationController
-    skip_before_action :login_required, only: [:new, :create]
-    
+    include SessionsHelper
+    before_action :require_login, only: [:destroy]
+  
     def new
+      redirect_to tasks_path if logged_in?
     end
-
+  
     def create
-        user = User.find_by(email: params[:session][:email].downcase)
-        if user && user.authenticate(params[:session][:password])
-            log_in(user)
-            redirect_to user_path(user.id)
-        else
-            flash.now[:danger] = 'échec de la connexion'
-            render :new
-        end
+      user = User.find_by(email: params[:session][:email].downcase)
+      if user && user.authenticate(params[:session][:password])
+        log_in(user)
+        flash[:notice] = 'ログインしました'
+        redirect_to tasks_path
+      else
+        flash.now[:alert] = 'メールアドレスまたはパスワードに誤りがあります'
+        render 'new'
       end
-      def destroy
-        session.delete(:user_id)
-        flash[:notice] = 'déconnecté'
-    redirect_to new_session_path
+    end
+  
+    def destroy
+      log_out
+      redirect_to new_session_path, notice: 'ログアウトしました'
+    end
+  
+    private
+  
+    def require_login
+      unless logged_in?
+        store_location
+        flash[:alert] = "ログインしてください"
+        redirect_to new_session_path
       end
-end
+    end
+  end
