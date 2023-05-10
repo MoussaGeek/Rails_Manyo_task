@@ -1,13 +1,9 @@
-<% if flash[:notice] %>
-  <div class="notice"><%= flash[:notice] %></div>
-<% end %>
-
-<h1><%= t("common.new_task") %></h1>
+<h1><%= t(".title") %></h1>
 
 <%= form_with(model: @task, local: true) do |form| %>
   <% if @task.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@task.errors.count, "error") %> prohibited this task from being saved:</h2>
+      <h2><%= @task.errors.count %> 件のエラーが発生しました</h2>
 
       <ul>
       <% @task.errors.full_messages.each do |message| %>
@@ -28,22 +24,22 @@
   </div>
 
   <div class="field">
-    <%= form.label :終了期限 %><br>
+    <%= form.label :deadline_on %>
     <%= form.date_field :deadline_on %>
   </div>
 
   <div class="field">
-    <%= form.label :優先度 %><br>
+    <%= form.label :priority %>
     <%= form.select :priority, options_for_select(Task.priorities.map { |label, _value| [t("enums.task.priority_enum.#{label}"), label.to_s] }, @task&.priority&.to_s), include_blank: true %>
   </div>
 
   <div class="field">
-    <%= form.label :ステータス %><br>
+    <%= form.label :status %>
     <%= form.select :status, options_for_select(Task.statuses.map { |label, _value| [t("enums.task.status_enum.#{label}"), label.to_s] }, selected: params[:status]), include_blank: true %>
   </div>
-  
-    <div class="actions">
-      <%= form.submit t("common.create_task"), id: "create-task" %>
-    </div>
-  <% end %>
+
+  <div class="actions">
+    <%= form.submit t('helpers.submit.create', model: Task.model_name.human), id: "create-task" %>
+  </div>
+<% end %>
 <%= link_to t("common.back"), tasks_path, id: "back" %>

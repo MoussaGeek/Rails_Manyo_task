@@ -1,31 +1,27 @@
-<% if flash[:notice] %>
-  <div class="notice"><%= flash[:notice] %></div>
-<% end %>
-
-<h1><%= t("common.show_task") %></h1>
+<h1><%= t(".title") %></h1>
 
 <div>
-  <%= t("common.title") %>:
+  <%= t("activerecord.attributes.task.title") %>
   <%= @task.title %>
 </div>
 
 <div>
-  <%= t("common.content") %>:
+  <%= t("activerecord.attributes.task.content") %>
   <%= @task.content %>
 </div>
 
 <div>
-  <%= t("common.deadline") %>:
+  <%= t("activerecord.attributes.task.deadline_on") %>
   <%= @task.deadline_on %>
 </div>
 
 <div>
-  <%= t("common.priority") %>:
+  <%= t("activerecord.attributes.task.priority") %>
   <%= I18n.t("enums.task.priority_enum.#{@task[:priority]}") %>
 </div>
 
 <div>
-  <%= t("common.status") %>:
+  <%= t("activerecord.attributes.task.status") %>
   <%= I18n.t("enums.task.status_enum.#{@task[:status]}") %>
 </div>
 
