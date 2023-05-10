@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-    include SessionsHelper
+  include SessionsHelper
     before_action :require_login, only: [:destroy]
   
     def new
@@ -32,4 +32,4 @@ class SessionsController < ApplicationController
         redirect_to new_session_path
       end
     end
-  end
+end

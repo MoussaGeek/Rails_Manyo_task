@@ -1,5 +1,4 @@
 require 'factory_bot_rails'
-
 FactoryBot.define do
   factory :admin_user, class: User do
     sequence(:name) { |n| "admin#{n}" }

@@ -9,7 +9,6 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
   <% flash.each do |key, value| %>
     <p class="<%= key %>"><%= value %></p>
   <% end %>
