@@ -9,6 +9,8 @@ class LabelsController < ApplicationController
 
   # GET /labels/1 or /labels/1.json
   def show
+    @search_params = label_search_params
+    @labels = current_user.labels.search(@search_params)
   end
 
   # GET /labels/new

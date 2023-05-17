@@ -1,15 +1,15 @@
 class Task < ApplicationRecord
-    validates :title, presence: true
-    validates :content, presence: true
-    validates :deadline_on, presence: true
-    validates :priority, presence: true
-    validates :status, presence: true
-    belongs_to :user
-    has_many :task_labels, dependent: :destroy
-    has_many :labels, through: :task_labels
-  
-    enum priority: { low: 0, medium: 1, high: 2 }, _suffix: true
-    enum status: { todo: 0, doing: 1, done: 2 }, _suffix: true
+  validates :title, presence: true
+  validates :content, presence: true
+  validates :deadline_on, presence: true
+  validates :priority, presence: true
+  validates :status, presence: true
+  belongs_to :user
+  has_many :task_labels, dependent: :destroy
+  has_many :labels, through: :task_labels
+
+  enum priority: { low: 0, medium: 1, high: 2 }, _suffix: true
+  enum status: { todo: 0, doing: 1, done: 2 }, _suffix: true
 
   def self.in_status_order(statuses, status_suffix = :asc)
     statuses = Array(statuses).map(&:to_i).sort.map { |s| s.zero? ? :asc : :desc }

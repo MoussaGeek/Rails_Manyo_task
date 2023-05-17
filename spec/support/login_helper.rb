@@ -5,6 +5,7 @@ module LoginHelper
     fill_in "パスワード", with: user.password
     click_button "ログイン"
   end
+
   def sign_out
     click_link "ログアウト"
   end
